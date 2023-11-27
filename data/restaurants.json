@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Safari",
+    "address": "columbus, oh",
+    "cuisine": "african",
+    "website": "https://www.facebook.com/SafariCoffeeHouse/",
+    "description": "food is awesome"
+  },
+  {
+    "name": "Kabab ali",
+    "address": "London",
+    "cuisine": "British",
+    "website": "https://www.kabab.com",
+    "description": "diabolical food"
+  }
+]
