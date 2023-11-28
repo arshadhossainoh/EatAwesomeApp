@@ -23,7 +23,13 @@ app.get("/", (req, res) => {
 
 app.get("/restaurants", (req, res) => {
   // const htmlFilePath = path.join(__dirname, "views", "restaurants.html");
-  res.render("restaurants");
+  const filePath = path.join(__dirname, "data", "restaurants.json");
+  const fileData = fs.readFileSync(filePath);
+  const storedRestaurants = JSON.parse(fileData);
+  res.render("restaurants", {
+    numOfRestaurants: storedRestaurants.length,
+    restaurants: storedRestaurants,
+  });
 });
 
 app.get("/recommend", (req, res) => {
@@ -42,7 +48,7 @@ app.post("/recommend", (req, res) => {
 });
 app.get("/confirm", (req, res) => {
   //const htmlFilePath = path.join(__dirname, "views", "confirm.html");
-  res.render("confirm");
+  res.redirect("/confirm");
 });
 app.get("/about", (req, res) => {
   //const htmlFilePath = path.join(__dirname, "views", "about.html");
