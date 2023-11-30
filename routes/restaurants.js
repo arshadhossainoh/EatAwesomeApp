@@ -4,11 +4,33 @@ const restaurantData = require("../util/restaurant-data");
 const router = express.Router();
 
 router.get("/restaurants", (req, res) => {
+  let order = req.query.order;
+  let nextOrder = "desc";
+
+  if (order !== "asc" && order !== "desc") {
+    order = "asc";
+  }
+
+  if (order === "desc") {
+    nextOrder = "asc";
+  }
+
   // const htmlFilePath = path.join(__dirname, "views", "restaurants.html");
   const storedRestaurants = restaurantData.getStoredRestautants();
+  // here we are sorting restaurants by name saying alibaba should come before bbc
+  storedRestaurants.sort((resA, resB) => {
+    if (
+      (order === "asc" && resA.name > resB.name) ||
+      (order === "desc" && resB.name > resA.name)
+    ) {
+      return 1;
+    }
+    return -1;
+  });
   res.render("restaurants", {
     numOfRestaurants: storedRestaurants.length,
     restaurants: storedRestaurants,
+    nextOrder: nextOrder,
   });
 });
 
